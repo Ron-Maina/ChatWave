@@ -30,9 +30,7 @@ class Users(db.Model, SerializerMixin):
             password.encode('utf-8'
             )
         )
-        print("After hash")
         self._password_hash = password_hash.decode('utf-8')
-        print("Hash generated", self._password_hash)
 
     def authenticate(self, password):
         return bcrypt.check_password_hash(
