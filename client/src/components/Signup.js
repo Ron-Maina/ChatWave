@@ -43,14 +43,14 @@ function Signup() {
                     alert('Successful signup')
                     loginPage()
                 } else {
-                    alert('SignUp failed')
+                    alert('Email or Number already exists')
                 }
             });
         },
     });
 
     return (
-        <div className='frame' id='sign-up'>
+        <div className='frame'>
             <div style={{textAlign: 'center'}}>
                 <h2 id='signup-text'>ChatWave</h2>
                 <div style={{color: 'white', fontSize: '40px'}}><BsFillChatDotsFill/></div>
