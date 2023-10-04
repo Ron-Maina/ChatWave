@@ -1,4 +1,4 @@
-from flask import make_response, jsonify, request, session
+from flask import make_response, jsonify, request, session, render_template
 from flask_restful import Resource
 from werkzeug.exceptions import BadRequest
 
@@ -11,16 +11,9 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json.compact = False
 
 
-class Index(Resource):
-    def get(self):
-        response_dict = {
-            "message": "Welcome"
-        }
-        result = make_response(
-            jsonify(response_dict),
-            200
-        )
-        return result
+@app.route('/signup')
+def index():
+    return render_template("index.html")
     
 class Signup(Resource):
     def post(self):
