@@ -1,0 +1,15 @@
+#sidebar{
+  color: #fff;
+  background-color: #5F7FF0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+#sidebar-menu{
+  padding-top: 70px;
+}
+#sidebar-items{
+  margin-bottom: 30px;
+  color: white;
+}
