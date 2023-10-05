@@ -13,6 +13,11 @@ app = Flask(
     template_folder='../client/build'
 )
 
+app.secret_key = 'd3b0461fe10d9ec3e8058caad4b42ecf'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///chatwave.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.json.compact = False
+
 metadata = MetaData(naming_convention={
     "ix": 'ix_%(column_0_label)s',
     "uq": "uq_%(table_name)s_%(column_0_name)s",

@@ -6,9 +6,7 @@ from werkzeug.exceptions import BadRequest
 from config import app, db, api
 from models import  Users, Contacts, Chats
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///chatwave.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.json.compact = False
+app.config['SESSION_TYPE'] = 'filesystem'
 
 
 @app.route('/signup')
@@ -50,7 +48,7 @@ class Login(Resource):
     def post(self):
         user = Users.query.filter(Users.email == request.get_json()['email']).first()
         if user:
-            session['user'] = user.id
+            session['user_id'] = user.id
             response = make_response(
                 jsonify(user.to_dict()),
                 200
@@ -61,7 +59,7 @@ class Login(Resource):
     
 class Logout(Resource):
     def delete(self):
-        session["user"] = None
+        session["user_id"] = None
         return {}, 204
     
 class CheckSession(Resource):
@@ -110,6 +108,23 @@ class GetContactByID(Resource):
             )
             return result
         
+    def delete(self, id):
+        contact = Contacts.query.filter_by(id=id).first()
+        db.session.delete(contact)
+        db.session.commit()
+
+        response_body = {
+            "delete_successful": True,
+            "message": "Review deleted."    
+        }
+
+        response = make_response(
+            jsonify(response_body),
+            200
+        )
+
+        return response
+        
 class Chat(Resource):
     def post(self):
         data = request.get_json()
@@ -123,7 +138,6 @@ class Chat(Resource):
             db.session.add(message)
             db.session.commit()
     
-api.add_resource(Index, '/')
 api.add_resource(Signup, '/signup')
 api.add_resource(Login, '/login')
 api.add_resource(Logout, '/logout')
