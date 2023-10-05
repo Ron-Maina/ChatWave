@@ -30,7 +30,7 @@ with app.app_context():
         probability_of_nothing = 0.2 
         random_number = random.random()
         if random_number < probability_of_nothing:
-            result = None 
+            result = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKaiKiPcLJj7ufrj6M2KaPwyCT4lDSFA5oog&usqp=CAU' 
         else:
             result = random.choice(profile_pics)
 
