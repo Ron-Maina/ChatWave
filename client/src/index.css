@@ -5,15 +5,21 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: black;
+  /* background-color: black; */
+  background-image: url('bg.jpg');
+
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-#sign-up{
+#authenticate{
   background-image: linear-gradient(135deg, #24317D, #050920);
+}
+hr{
+height: 1.5px;
+border: 1px solid black;
 }
 .frame {
   position: relative;
@@ -23,11 +29,28 @@ code {
   margin-right: 25%;
   margin-top: 12px;
   border: 1px solid #333;
-  background: rgba(255, 255, 255, 0.75);
   padding: 15px 20px 18px 18px;
-  box-shadow: 2px 5px 5px grey;
+  box-shadow: 10px 10px 10px rgb(100, 198, 231);
   overflow-y: auto;
 }
+.home-screen{
+  position: relative;
+  height:870px;
+  width: 600px;
+  padding: 20px;
+  margin-left: 35%;
+  margin-right: 30%;
+  margin-top: 12px;
+  border: 2px solid #333;
+  padding: 15px 20px 18px 18px;
+  box-shadow: 10px 5px 10px rgb(100, 198, 231);
+  overflow: hidden;
+  display: table;
+  border-radius: 30px;
+  display: flex;
+  background-color: #E3E3E3;
+}
+
 #signup-text{
   color: #FFF;
   font-family: Inter;
@@ -47,7 +70,6 @@ code {
   background: transparent;
   font-size: 1em;
   color: white;
-  transition: 0.3s ease;
 }
 .input-label{
   display: block;
@@ -58,10 +80,81 @@ code {
   padding-top: 5px;
   text-align: left;
 }
+
 #sign-up p{
   font-family: Inter;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+form{
+  margin: 30px;
+  text-align: center;
+}
+#trash{
+  color: red;
+  right: 30px;
+  position: absolute;
+  top: 45px;
+}
+
+.slide-out {
+  margin-left: 166px;
+  transition: margin-left 0.1s ease;
+}
+.slide-in {
+  margin-left: 69px;
+  transition: margin-left 0.1s ease;
+}
+.slide-in::-webkit-scrollbar {
+  width: 0; 
+}
+.slide-out::-webkit-scrollbar {
+  width: 0; 
+}
+.headings-light{
+  color: #000;
+  text-align: left;
+  font-family: Inter;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin-left: 15px;
+}
+#searchbar label{
+  margin-top: 40px;
+  margin-left: 20px;
+}
+#searchbar input{
+  margin-top: 10px;
+  margin-left: 20px;
+}
+.info{
+  margin-top: 15%;
+  position: relative;
+  width: 500px
+}
+.image{
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+#profile{
+  display: flex;
+  gap: 20px;
+}
+#new-message{
+  position: absolute;
+  bottom: -30px;
+  display: flex;
+}
+.input-style input{
+  border-bottom: 2px solid black;
+  margin-top: 50px;
+  color: #000;
+}
+.input-style label{
+  color: #000;
 }
