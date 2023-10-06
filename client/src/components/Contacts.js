@@ -1,18 +1,21 @@
 import React, {useState, useEffect} from 'react'
 import {useNavigate } from 'react-router-dom'
 import Sidebar from './Sidebar'
+import Search from './Search'
 
 
-function Contacts({onChat}) {
+function Contacts({onChat, user}) {
     const navigate = useNavigate()
 
     const [contacts, setContacts] = useState([])
+    const [searchTerm, setSearchTerm] = useState("");
 
     useEffect(() => {
         fetch('/contacts')
         .then(res => res.json())
         .then(data => setContacts(data))
-    }, [contacts])
+    }, [])
+
     const [isActive, setIsActive] = useState(false);
 
     function renderChange(state){
@@ -26,7 +29,6 @@ function Contacts({onChat}) {
     function handleClick(contact){
         onChat(contact)
         navigate('/chat')
-
     }
 
     function handleDelete(id){
@@ -42,13 +44,19 @@ function Contacts({onChat}) {
         setContacts(new_contacts)
     }
    
+    const filtered_contacts = contacts.filter(contact => {
+        return contact.name.toLowerCase().includes(searchTerm.toLowerCase())
+    })
+   
     return (
         <div className='home-screen'>
-            <Sidebar onchange={renderChange}/>
+            <Sidebar onchange={renderChange} user={user}/>
             <div className={isActive ? 'slide-out' : 'slide-in'} style={{overflowY: 'auto'}}>
                 <h2 className='headings-light'>Contacts</h2>
+                <Search searchTerm={searchTerm} onSearchChange={setSearchTerm} />
+
                 <div className='info' >
-                    {contacts.map(contact => (
+                    {filtered_contacts.map(contact => (
                         <div key={contact.id} 
                         style={{display: 'flex', gap: '30px', margin: '20px'}}>
 
@@ -60,7 +68,7 @@ function Contacts({onChat}) {
                             <div 
                             style={{color: 'red', right: '70px', position: 'absolute', marginTop: '10px'}}
                             onClick={() => handleDelete(contact.id)}>
-                                <i class="fa fa-trash"></i>
+                                <i className='trash' class="fa fa-trash"></i>
                             </div>
                         </div>
                     ))}
