@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
 import Sidebar from './Sidebar';
 
-function Chat({chat}) {
+function Chat({chat, onChat, user}) {
     const [isActive, setIsActive] = useState(false);
     const [body, setBody] = useState("");
-    
+
     function renderChange(state){
       if (state === true){
         setIsActive(true);
@@ -14,26 +14,43 @@ function Chat({chat}) {
     }
     function handleSubmit(e){
         e.preventDefault()
-        console.log('hi')
+        if (body !== ""){
+            onChat(chat)
+        }
+        
+        let chat_id = {
+            "message": body,
+            "contact_id": chat.id
+        }
+        fetch('/chats', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(chat_id)
+        })
+        .then(res => res.json())
+        .then(data => console.log(data))
         setBody('')
     }
     return (
         <div className='home-screen'>
-            <Sidebar onchange={renderChange}/>
+            <Sidebar onchange={renderChange} user={user}/>
             <div>
                 <div className={isActive ? 'slide-out' : 'slide-in'} style={{overflowY: 'auto', width: '500px'}} id='profile'>
-                    <img className = 'image' src={chat.profile_pic} alt='profile_pic'/>
-                    <h3 style={{fontSize: '1.5em', marginTop: '10px'}}>{chat.name}</h3>
-                    <i style={{marginTop: '12px', marginRight: '100px'}} class="fa fa-phone"></i>
-                    <i class="fa fa-video-camera"></i>
-
-                    <hr size='10'/>
+                    <div className='headings-light' style={{display: 'flex'}}>
+                        <img className = 'image' src={chat.profile_pic} alt='profile_pic'/>
+                        <h3 style={{fontSize: '25px', marginTop: '10px', marginLeft: '15px'}}>{chat.name}</h3>
+                    </div>
+                    
                 </div>
+                <hr className={isActive ? 'slide-out' : 'slide-in'}/>
                 <form className={isActive ? 'slide-out' : 'slide-in'} 
                 id='new-message' onSubmit={handleSubmit}>
+                <label htmlFor="message" className='input-label'></label>
                     <input
                     type="text"
-                    name="body"
+                    name="message"
                     autoComplete="off"
                     value={body}
                     size='50'
