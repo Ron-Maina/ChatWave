@@ -4,12 +4,13 @@ import Button from 'react-bootstrap/Button';
 
 
 
-function UpdateProfile({user}) {
+function UpdateProfile({user, onUpdate}) {
     const [isActive, setIsActive] = useState(false);
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [number, setNumber] = useState("");
+    const [name, setName] = useState(user.name);
+    const [email, setEmail] = useState(user.email);
+    const [number, setNumber] = useState(user.number);
     const [pic, setPic] = useState('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKaiKiPcLJj7ufrj6M2KaPwyCT4lDSFA5oog&usqp=CAU');
+    
 
     
     function renderChange(state){
@@ -22,9 +23,6 @@ function UpdateProfile({user}) {
 
     function handleSubmit(e){
         e.preventDefault()
-        setEmail('')
-        setName('')
-        setNumber('')
 
         fetch(`/users/${user.id}`, {
             method: 'PATCH',
@@ -41,14 +39,18 @@ function UpdateProfile({user}) {
                 if (!response.ok) {
                     alert("failed to Update");
                 }
+                alert("Succesful Update");
                 return response.json();
         })
         .then((responseData) => {
-            console.log("Posted Data:", responseData);
+            onUpdate(responseData);
         })
         .catch((error) => {
             console.error("Error:", error);
         });
+        setEmail('')
+        setName('')
+        setNumber('')
     }
 
   return (
