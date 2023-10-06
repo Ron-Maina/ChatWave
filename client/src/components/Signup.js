@@ -18,7 +18,7 @@ function Signup() {
         email: yup.string().email("Invalid email").required("Must enter email"),
         name: yup.string().required("Must enter a name"),
         password: yup.string().required("Must Enter Password"),
-        number: yup.string().required("Must Enter Phone Number")
+        number: yup.number().positive().min(10).required("Must Enter Phone Number")
     });
 
     const formik = useFormik({
@@ -73,6 +73,7 @@ function Signup() {
                 <label htmlFor="name" className='input-label'>Name:</label>
                 <br />
                 <input
+                type='text'
                 className='input-field'
                 autoComplete="off"
                 id="name"
