@@ -5,7 +5,6 @@ import Button from 'react-bootstrap/Button';
 import {BsFillChatDotsFill} from "react-icons/bs";
 
 
-
 function Login({onLogin}) {
     const navigate = useNavigate() 
 
@@ -25,9 +24,21 @@ function Login({onLogin}) {
             },
             body: JSON.stringify(userDetails),
         })
-        .then(res => res.json())
+        .then((response) => {
+            if (!response.ok) {
+                alert("Invalid Email or Password");
+                setEmail('')
+                setPass('')
+            }else{
+                navigate("/home", {replace: true})
+                return response.json();
+            }   
+        })
         .then(user => onLogin(user))
-        navigate("/home", {replace: true})
+        .catch((error) => {
+            console.error("Error:", error);
+        });
+        
     }
 
   return (
