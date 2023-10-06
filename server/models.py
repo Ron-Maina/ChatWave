@@ -25,7 +25,6 @@ class Users(db.Model, SerializerMixin):
     
     @password_hash.setter
     def password_hash(self, password):
-        print("Before hahing")
         password_hash = bcrypt.generate_password_hash(
             password.encode('utf-8'
             )
@@ -59,12 +58,12 @@ class Contacts(db.Model, SerializerMixin):
 class Chats(db.Model, SerializerMixin):
     __tablename__ = 'chats'
 
-    serialize_rules = ('-contact.chats', '-user.chats',)
+    serialize_rules = ('-contact.chats', '-user.chats','-contact_id', '-user_id', '-created_at')
 
     id = db.Column(db.Integer, primary_key=True)
     messages = db.Column(db.String)
     responses = db.Column(db.String)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
 
-    contact_id = db.Column(db.Integer, db.ForeignKey('contacts.id'), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    contact_id = db.Column(db.Integer, db.ForeignKey('contacts.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
