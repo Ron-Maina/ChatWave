@@ -3,7 +3,7 @@ import Sidebar from './Sidebar'
 import Button from 'react-bootstrap/Button';
 
 
-function NewContact() {
+function NewContact({user}) {
     const [isActive, setIsActive] = useState(false);
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -40,6 +40,7 @@ function NewContact() {
             if (!response.ok) {
                 alert("Contact Already Exists");
             }
+            alert("Added Successfully")
             return response.json();
         })
         .then((responseData) => {
@@ -53,10 +54,10 @@ function NewContact() {
 
     return (
         <div className='home-screen'>
-            <Sidebar onchange={renderChange}/>
+            <Sidebar onchange={renderChange} user={user}/>
             <div className={isActive ? 'slide-out' : 'slide-in'} style={{overflowY: 'auto'}}>
-                <h2 style={{fontSize: '1.5em', marginLeft: '15px'}} className='headings-light'>Add Contact</h2>
-                <form onSubmit={handleSubmit} id='add-contact'>
+                <h2 style={{fontSize: '1.5em'}} className='headings-light'>Add Contact</h2>
+                <form onSubmit={handleSubmit} className='input-style' id='searchbar'>
                     <label htmlFor="message" className='input-label'>Name:</label>
                     <input
                     className='input-field'
