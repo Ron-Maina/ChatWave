@@ -4,7 +4,7 @@ from flask_migrate import Migrate
 from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import MetaData
-
+from flask_cors import CORS
 
 app = Flask(
     __name__,
@@ -12,6 +12,8 @@ app = Flask(
     static_folder='../client/build',
     template_folder='../client/build'
 )
+
+cors = CORS(app)
 
 app.secret_key = 'd3b0461fe10d9ec3e8058caad4b42ecf'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///chatwave.db'
