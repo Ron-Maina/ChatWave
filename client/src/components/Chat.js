@@ -12,10 +12,11 @@ function Chat({chat, onChat, user}) {
         setIsActive(false)
       }
     }
+
     function handleSubmit(e){
         e.preventDefault()
         if (body !== ""){
-            onChat(chat)
+            onChat(chat.id)
         }
         
         let chat_id = {
@@ -30,8 +31,12 @@ function Chat({chat, onChat, user}) {
             body: JSON.stringify(chat_id)
         })
         .then(res => res.json())
-        .then(data => console.log(data))
         setBody('')
+
+        // fetch(`/chat-session/${user.id}`)
+        // .then(res => res.json())
+        // .then(data => setMessages(data.chats))
+
     }
     return (
         <div className='home-screen'>
@@ -44,6 +49,7 @@ function Chat({chat, onChat, user}) {
                     </div>
                     
                 </div>
+                
                 <hr className={isActive ? 'slide-out' : 'slide-in'}/>
                 <form className={isActive ? 'slide-out' : 'slide-in'} 
                 id='new-message' onSubmit={handleSubmit}>
