@@ -55,12 +55,12 @@ function UpdateProfile({user, onUpdate}) {
 
   return (
     <div className='home-screen'>
-        <Sidebar onchange={renderChange}/>
+        <Sidebar onchange={renderChange} user={user}/>
         <div className={isActive ? 'slide-out' : 'slide-in'} style={{overflowY: 'auto'}}>
-            <h4 style={{fontSize: '1.5em', marginLeft: '15px'}} 
+            <h4 style={{fontSize: '1.5em'}} 
             className='headings-light'>Profile Update</h4>
             
-            <form onSubmit={handleSubmit} id='add-contact'>
+            <form onSubmit={handleSubmit} className='input-style' id='searchbar'>
                 <label htmlFor="message" className='input-label'>Name:</label>
                 <input
                 className='input-field'
