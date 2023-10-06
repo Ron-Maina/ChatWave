@@ -38,6 +38,10 @@ function Sidebar({onchange, user}) {
     onchange(isActive)
 
     function Logout(){
+        fetch("/logout", {
+            method: "DELETE",
+        })
+
         navigate("/login", {replace: true})
     }
 
@@ -50,7 +54,6 @@ function Sidebar({onchange, user}) {
                     </CDBSidebarHeader>
                     <CDBSidebarContent className="sidebar-content">
                         <CDBSidebarMenu id = 'sidebar-menu'>
-                            <CDBSidebarMenuItem id= 'sidebar-items' icon="toggle-on"></CDBSidebarMenuItem>
 
                             <NavLink to="/home">
                             <CDBSidebarMenuItem id= 'sidebar-items' icon="home"></CDBSidebarMenuItem>
@@ -68,9 +71,11 @@ function Sidebar({onchange, user}) {
                         </CDBSidebarMenu>
                     </CDBSidebarContent>
                     <CDBSidebarFooter style={{ textAlign: 'center' }}>
-                        <div className="sidebar-btn-wrapper" style={{padding: '250px 5px',}}>
-                            <i i class="fa fa-cog"></i>
-                        </div>
+                        <NavLink to="/settings">
+                            <div className="sidebar-btn-wrapper" style={{padding: '250px 5px',}}>
+                                <i style={{color:'white'}} class="fa fa-info"></i>
+                            </div>
+                        </NavLink>
                     </CDBSidebarFooter>
                 </>
             ) : (
@@ -83,7 +88,6 @@ function Sidebar({onchange, user}) {
 
                     <CDBSidebarContent className="sidebar-content">
                         <CDBSidebarMenu id = 'sidebar-menu'>
-                            <CDBSidebarMenuItem id= 'sidebar-items' icon="toggle-on">Theme</CDBSidebarMenuItem>
 
                             <CDBSidebarMenuItem id= 'sidebar-items' icon="home">Home</CDBSidebarMenuItem>
 
@@ -97,11 +101,15 @@ function Sidebar({onchange, user}) {
                         </CDBSidebarMenu>
                     </CDBSidebarContent>
 
+                    
                     <CDBSidebarFooter style={{ textAlign: 'center' }}>
-                        <div className="sidebar-btn-wrapper" style={{padding: '250px 5px',}}>
-                            <i i class="fa fa-cog"> Settings</i>
-                        </div>
+                        <NavLink to="/settings">
+                            <div className="sidebar-btn-wrapper" style={{padding: '250px 5px',}}>
+                                <i i class="fa fa-info"> About</i>
+                            </div>
+                        </NavLink>
                     </CDBSidebarFooter>
+                    
                 </>
             )}
         </div>
