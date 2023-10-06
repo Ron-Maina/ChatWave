@@ -11,7 +11,7 @@ import {
 import { NavLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
-function Sidebar({onchange}) {
+function Sidebar({onchange, user}) {
     const navigate = useNavigate()
     const [isActive, setIsActive] = useState(false);
 
@@ -77,7 +77,7 @@ function Sidebar({onchange}) {
                 <>  
                     <NavLink to="/update-profile">
                     <CDBSidebarHeader>
-                        <i className="fa fa-user fa-large"> Profile</i> 
+                        <i className="fa fa-user fa-large"> {user.name}</i> 
                     </CDBSidebarHeader>
                     </NavLink>
 
