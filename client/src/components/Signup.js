@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useFormik } from "formik";
 import * as yup from 'yup'
@@ -50,17 +50,18 @@ function Signup() {
     });
 
     return (
-        <div className='frame'>
+        <div className='frame' id='authenticate'>
             <div style={{textAlign: 'center'}}>
                 <h2 id='signup-text'>ChatWave</h2>
                 <div style={{color: 'white', fontSize: '40px'}}><BsFillChatDotsFill/></div>
             </div>
 
-            <form onSubmit={formik.handleSubmit} style={{ margin: "30px", textAlign: 'center'}}>
+            <form onSubmit={formik.handleSubmit}>
                 <label htmlFor="email" className='input-label'>Email Address:</label>
                 <br />
                 <input
                 className='input-field'
+                autoComplete="off"
                 type='email'
                 id="email"
                 name="email"
@@ -73,6 +74,7 @@ function Signup() {
                 <br />
                 <input
                 className='input-field'
+                autoComplete="off"
                 id="name"
                 name="name"
                 onChange={formik.handleChange}
@@ -84,6 +86,7 @@ function Signup() {
                 <br />
                 <input
                 className='input-field'
+                autoComplete="off"
                 id="number"
                 name="number"
                 onChange={formik.handleChange}
@@ -95,6 +98,7 @@ function Signup() {
                 <br />
                 <input
                 className='input-field'
+                autoComplete="off"
                 id="password"
                 name="password"
                 onChange={formik.handleChange}
