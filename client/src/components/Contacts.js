@@ -28,7 +28,7 @@ function Contacts({onChat}) {
         navigate('/chat')
 
     }
-    
+
     function handleDelete(id){
         fetch(`/contacts/${id}`, {
             method: 'DELETE',   
@@ -52,8 +52,8 @@ function Contacts({onChat}) {
                         <div key={contact.id} 
                         style={{display: 'flex', gap: '30px', margin: '20px'}}>
 
-                            <div style={{display: 'flex', gap: '30px'}} onClick={() => handleClick(contact)}>
-                                <img style= {{height: '50px', width: '50px', borderRadius: '50%'}}src={contact.profile_pic} alt='profile_pic'/>
+                            <div id='profile' onClick={() => handleClick(contact)}>
+                                <img className= 'image' src={contact.profile_pic} alt='profile_pic'/>
                                 <p style={{margin: '10px'}}>{contact.name}</p>
                             </div>
 
