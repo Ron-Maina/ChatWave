@@ -8,13 +8,15 @@ import Contacts from './Contacts';
 import Chat from './Chat';
 import NewContact from './NewContact';
 import UpdateProfile from './UpdateProfile';
+import About from './About';
 
 
 function App() {
   const [user, setUser] = useState(null);
   const [chat, setChat] = useState({})
-  const [chatContact, setChatContact] = useState([])
+  const [chatContact, setChatContact] = useState('')
   const [chatID, setchatID] = useState([])
+  const [conversations, setConversations] = useState([])
 
   useEffect(() => {
     fetch("/check_session")
@@ -28,21 +30,11 @@ function App() {
     });
   }, []);
 
-  // useEffect(() => {
-  //   fetch(`/contact-session/${user.id}`)
-  //   .then((response) => {
-  //     if (response.ok) {
-  //       response.json()
-  //       .then((data) => {
-  //         data.chats.map(chat => {
-  //           setChatContact([...chatContact, {"name": chat.contact.name, "profile_pic": chat.contact}])
-  //         })
-  //       });
-  //     } else{
-  //       console.log('Session not found')
-  //     }
-  //   });
-  // }, [user])
+  useEffect(() => {
+    fetch('/contact-session')
+    .then(res => res.json())
+    .then(data => setConversations([...conversations, data]))
+  }, [chatContact])
 
   function handleLogin(user){
     setUser(user)
@@ -56,25 +48,25 @@ function App() {
     setUser(data)
   }
 
-  function renderChatContact(contact){
-    if (chatID.includes(contact.id)){
+  function renderChatContact(id){
+    if (chatID.includes(id)){
       return null
     }else{
-      setchatID([...chatID, contact.id])
-      setChatContact([...chatContact, contact])
+      setchatID([...chatID, id])
+      setChatContact(id)
     }  
   }
 
   return (
     <Routes>
-      <Route path="/" element = {<Signup />}/>
-      <Route path="/login" element = {<Login onLogin={handleLogin}/>}/>
-      <Route exact path="/home" element = {<Home chatContact={chatContact} user={user}/>}/>
-      <Route path="/contacts" element = {<Contacts onChat={renderChat} user={user}/>}/>
-      <Route path="/chat" element = {<Chat chat={chat} onChat={renderChatContact} user={user}/>}/>
-      <Route path="/new-contact" element = {<NewContact user={user}/>}/>
-      <Route path="/update-profile" element = {<UpdateProfile user={user} onUpdate={handleUpdate}/>}/>
-
+      <Route exact path="/" element = {<Signup />}/>
+      <Route exact path="/login" element = {<Login onLogin={handleLogin}/>}/>
+      <Route exact path="/home" element = {<Home conversations={conversations} user={user} onChat={renderChat} chat={chat} />}/>
+      <Route exact path="/contacts" element = {<Contacts onChat={renderChat} user={user}/>}/>
+      <Route exact path="/chat" element = {<Chat chat={chat} onChat={renderChatContact} user={user}/>}/>
+      <Route exact path="/new-contact" element = {<NewContact user={user}/>}/>
+      <Route exact path="/update-profile" element = {<UpdateProfile user={user} onUpdate={handleUpdate}/>}/>
+      <Route exact path="/settings" element = {<About user={user}/>}/>
     </Routes>
   );
 }
