@@ -1,6 +1,8 @@
 from flask import make_response, jsonify, request, session, render_template
 from flask_restful import Resource
 from werkzeug.exceptions import BadRequest
+from dotenv import load_dotenv
+load_dotenv()
 
 
 from config import app, db, api, bcrypt
