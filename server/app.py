@@ -10,7 +10,8 @@ app.config['SESSION_TYPE'] = 'filesystem'
 
 
 @app.route('/')
-def index():
+@app.route('/<int:id>')
+def index(id=0):
     return render_template("index.html")
    
 class Signup(Resource):
@@ -58,6 +59,7 @@ class Login(Resource):
             return response
         else:
             return {"message":"You do not have an account"}, 401
+        
     
 class Logout(Resource):
     def delete(self):
@@ -187,6 +189,7 @@ class Chat(Resource):
                 )
                 db.session.add(message)
                 db.session.commit()
+                session['contact'] = data.get('contact_id')  
 
             except Exception as e:
                 db.session.rollback()  
@@ -202,10 +205,44 @@ class Chat(Resource):
 
             return response
         
+
+class GetChatByID(Resource):
+    def delete(self, id):
+        contact = Chats.query.filter_by(id=id).first()
+        db.session.delete(contact)
+        db.session.commit()
+
+        response_body = {
+            "delete_successful": True,
+            "message": "Review deleted."    
+        }
+
+        response = make_response(
+            jsonify(response_body),
+            200
+        )
+
+        return response
+
+        
 class ContactSession(Resource):
-    def get(self, id):
-        user = Users.query.filter_by(id=id).first()
-        return jsonify(user.to_dict())
+    def get(self):
+        contact = Contacts.query.filter(Contacts.id == session.get('contact')).first()
+        print(contact)
+        if contact:
+            contact_dict ={
+                "name": contact.name,
+                "profile_pic": contact.profile_pic
+            }
+            response = make_response(
+                jsonify(contact_dict), 
+                200
+            )
+            return response
+        else:
+            return {}, 401
+    
+
     
 
 api.add_resource(Signup, '/signup')
@@ -216,8 +253,8 @@ api.add_resource(Contact, '/contacts')
 api.add_resource(GetContactByID, '/contacts/<int:id>')
 api.add_resource(GetUserByID, '/users/<int:id>')
 api.add_resource(Chat, '/chats')
-api.add_resource(ContactSession, '/contact-session/<int:id>')
-
+api.add_resource(GetChatByID, '/chats/<int:id>')
+api.add_resource(ContactSession, '/contact-session')
 
 
 if __name__ == '__main__':
