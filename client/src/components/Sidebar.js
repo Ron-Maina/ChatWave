@@ -2,7 +2,6 @@ import './sidebar.css'
 import React from 'react'
 import { useState } from 'react';
 import {
-    CDBSidebar,
     CDBSidebarContent,
     CDBSidebarFooter,
     CDBSidebarHeader,
@@ -39,29 +38,32 @@ function Sidebar({onchange}) {
     onchange(isActive)
 
     function Logout(){
-        navigate("/", {replace: true})
+        navigate("/login", {replace: true})
     }
 
     return (
         <div id='sidebar' onMouseLeave={handleSidebarClose}>
             {!sidebarOpen ? (
                 <>
-                    <CDBSidebarHeader onMouseEnter={handleSidebarOpen} 
-                    onMouseLeave={handleOut}>
+                    <CDBSidebarHeader onMouseEnter={handleSidebarOpen} onMouseLeave={handleOut}>
                         <i className={"fa fa-user fa-large"}></i>
                     </CDBSidebarHeader>
                     <CDBSidebarContent className="sidebar-content">
                         <CDBSidebarMenu id = 'sidebar-menu'>
                             <CDBSidebarMenuItem id= 'sidebar-items' icon="toggle-on"></CDBSidebarMenuItem>
 
+                            <NavLink to="/home">
                             <CDBSidebarMenuItem id= 'sidebar-items' icon="home"></CDBSidebarMenuItem>
+                            </NavLink>
 
                             <NavLink to="/contacts">
                                 <CDBSidebarMenuItem id= 'sidebar-items' icon="address-book"></CDBSidebarMenuItem>
                             </NavLink>
                             
+                            <NavLink to="/new-contact">
                             <CDBSidebarMenuItem id= 'sidebar-items' icon="plus-circle"></CDBSidebarMenuItem>
-                        
+                            </NavLink>
+
                             <CDBSidebarMenuItem id= 'sidebar-items' icon="times" onClick={Logout}></CDBSidebarMenuItem>
                         </CDBSidebarMenu>
                     </CDBSidebarContent>
@@ -72,10 +74,13 @@ function Sidebar({onchange}) {
                     </CDBSidebarFooter>
                 </>
             ) : (
-                <>
+                <>  
+                    <NavLink to="/update-profile">
                     <CDBSidebarHeader>
                         <i className="fa fa-user fa-large"> Profile</i> 
                     </CDBSidebarHeader>
+                    </NavLink>
+
                     <CDBSidebarContent className="sidebar-content">
                         <CDBSidebarMenu id = 'sidebar-menu'>
                             <CDBSidebarMenuItem id= 'sidebar-items' icon="toggle-on">Theme</CDBSidebarMenuItem>
