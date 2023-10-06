@@ -36,20 +36,26 @@ function NewContact() {
             },
             body: JSON.stringify(new_contact)
         })
-        .then((res) => {
-            if (res.status === 200) {
-                alert('Added successfully')
-            } else {
-                alert('Contact already exists')
-            }})
-        .then(data => console.log(data))
+        .then((response) => {
+            if (!response.ok) {
+                alert("Contact Already Exists");
+            }
+            return response.json();
+        })
+        .then((responseData) => {
+            console.log("Posted Data:", responseData);
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+        });
+        
     }
 
     return (
         <div className='home-screen'>
             <Sidebar onchange={renderChange}/>
             <div className={isActive ? 'slide-out' : 'slide-in'} style={{overflowY: 'auto'}}>
-                <h2 className='headings-light'>Add Contact</h2>
+                <h2 style={{fontSize: '1.5em', marginLeft: '15px'}} className='headings-light'>Add Contact</h2>
                 <form onSubmit={handleSubmit} id='add-contact'>
                     <label htmlFor="message" className='input-label'>Name:</label>
                     <input
