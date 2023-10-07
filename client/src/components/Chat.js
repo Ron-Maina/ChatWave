@@ -49,6 +49,7 @@ function Chat({chat, onChat, user}) {
                 id='new-message' onSubmit={handleSubmit}>
                 <label htmlFor="message" className='input-label'></label>
                     <input
+                    placeholder='Message..'
                     type="text"
                     name="message"
                     autoComplete="off"
