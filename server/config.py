@@ -7,6 +7,9 @@ from sqlalchemy import MetaData
 from flask_cors import CORS
 import os
 
+from dotenv import load_dotenv
+load_dotenv()
+
 app = Flask(
     __name__,
     static_url_path='',
