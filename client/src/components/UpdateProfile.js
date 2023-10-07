@@ -6,11 +6,11 @@ import Button from 'react-bootstrap/Button';
 
 function UpdateProfile({user, onUpdate}) {
     const [isActive, setIsActive] = useState(false);
-    const [name, setName] = useState(user.name);
-    const [email, setEmail] = useState(user.email);
-    const [number, setNumber] = useState(user.number);
+    const [name, setName] = useState(user?.name);
+    const [email, setEmail] = useState(user?.email);
+    const [number, setNumber] = useState(user?.number);
     const [pic, setPic] = useState('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKaiKiPcLJj7ufrj6M2KaPwyCT4lDSFA5oog&usqp=CAU');
-    
+    const [error, setError] = useState(null);
 
     
     function renderChange(state){
@@ -20,6 +20,20 @@ function UpdateProfile({user, onUpdate}) {
         setIsActive(false)
       }
     }
+
+    function isValidEmail(email) {
+        return /\S+@\S+\.\S+/.test(email);
+    }
+
+    const handleChange = event => {
+        if (!isValidEmail(event.target.value)) {
+          setError('Email is invalid');
+        } else {
+          setError(null);
+        }
+    
+        setEmail(event.target.value);
+    };
 
     function handleSubmit(e){
         e.preventDefault()
@@ -38,9 +52,11 @@ function UpdateProfile({user, onUpdate}) {
         .then((response) => {
                 if (!response.ok) {
                     alert("failed to Update");
+                }else{
+                    alert("Succesful Update");
+                    return response.json();
                 }
-                alert("Succesful Update");
-                return response.json();
+                
         })
         .then((responseData) => {
             onUpdate(responseData);
@@ -61,7 +77,7 @@ function UpdateProfile({user, onUpdate}) {
             className='headings-light'>Profile Update</h4>
             
             <form onSubmit={handleSubmit} className='input-style' id='searchbar'>
-                <label htmlFor="message" className='input-label'>Name:</label>
+                <label htmlFor="name" className='input-label'>Name:</label>
                 <input
                 className='input-field'
                 name="name"
@@ -72,7 +88,7 @@ function UpdateProfile({user, onUpdate}) {
                 onChange={(e) => setName(e.target.value)}
                 />
                 <br/>
-                <label htmlFor="message" className='input-label'>Email:</label>
+                <label htmlFor="email" className='input-label'>Email:</label>
                 <input
                 className='input-field'
                 name="email"
@@ -80,13 +96,16 @@ function UpdateProfile({user, onUpdate}) {
                 autoComplete="off"
                 value={email}
                 size='30'
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={handleChange}
                 />
+                {error && <h7 style={{color: 'red'}}>{error}</h7>}
                 <br/>
-                <label htmlFor="message" className='input-label'>Number:</label>
+                <label htmlFor="number" className='input-label'>Number:</label>
                 <input
                 className='input-field'
                 name="number"
+                maxLength={10}
+                minLength={10}
                 required
                 autoComplete="off"
                 value={number}

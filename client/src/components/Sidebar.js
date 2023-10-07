@@ -8,7 +8,7 @@ import {
     CDBSidebarMenu,
     CDBSidebarMenuItem,
   } from 'cdbreact';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 function Sidebar({onchange, user}) {
@@ -50,50 +50,51 @@ function Sidebar({onchange, user}) {
             {!sidebarOpen ? (
                 <>
                     <CDBSidebarHeader onMouseEnter={handleSidebarOpen} onMouseLeave={handleOut}>
-                        <i className={"fa fa-user fa-large"}></i>
+                        <i className={"fa fa-user fa-large"}> {user?.name}</i>
+                        <p></p>
                     </CDBSidebarHeader>
                     <CDBSidebarContent className="sidebar-content">
                         <CDBSidebarMenu id = 'sidebar-menu'>
 
-                            <NavLink to="/home">
+                            <Link to="/home">
                             <CDBSidebarMenuItem id= 'sidebar-items' icon="home"></CDBSidebarMenuItem>
-                            </NavLink>
+                            </Link>
 
-                            <NavLink to="/contacts">
+                            <Link to="/contacts">
                                 <CDBSidebarMenuItem id= 'sidebar-items' icon="address-book"></CDBSidebarMenuItem>
-                            </NavLink>
+                            </Link>
                             
-                            <NavLink to="/new-contact">
+                            <Link to="/new-contact">
                             <CDBSidebarMenuItem id= 'sidebar-items' icon="plus-circle"></CDBSidebarMenuItem>
-                            </NavLink>
+                            </Link>
 
                             <CDBSidebarMenuItem id= 'sidebar-items' icon="times" onClick={Logout}></CDBSidebarMenuItem>
                         </CDBSidebarMenu>
                     </CDBSidebarContent>
                     <CDBSidebarFooter style={{ textAlign: 'center' }}>
-                        <NavLink to="/settings">
+                        <Link to="/settings">
                             <div className="sidebar-btn-wrapper" style={{padding: '250px 5px',}}>
                                 <i style={{color:'white'}} class="fa fa-info"></i>
                             </div>
-                        </NavLink>
+                        </Link>
                     </CDBSidebarFooter>
                 </>
             ) : (
                 <>  
-                    <NavLink to="/update-profile">
+                    <Link to="/update-profile">
                     <CDBSidebarHeader>
-                        <i className="fa fa-user fa-large"> {user.name}</i> 
+                        <i className="fa fa-user fa-large"> {user?.name}</i> 
                     </CDBSidebarHeader>
-                    </NavLink>
+                    </Link>
 
                     <CDBSidebarContent className="sidebar-content">
                         <CDBSidebarMenu id = 'sidebar-menu'>
 
                             <CDBSidebarMenuItem id= 'sidebar-items' icon="home">Home</CDBSidebarMenuItem>
 
-                            <NavLink to="/contacts">
+                            <Link to="/contacts">
                                 <CDBSidebarMenuItem id= 'sidebar-items' icon="address-book">Contacts</CDBSidebarMenuItem>
-                            </NavLink>
+                            </Link>
 
                             <CDBSidebarMenuItem id= 'sidebar-items' icon="plus-circle">Add Contacts</CDBSidebarMenuItem>
 
@@ -103,11 +104,11 @@ function Sidebar({onchange, user}) {
 
                     
                     <CDBSidebarFooter style={{ textAlign: 'center' }}>
-                        <NavLink to="/settings">
+                        <Link to="/settings">
                             <div className="sidebar-btn-wrapper" style={{padding: '250px 5px',}}>
                                 <i i class="fa fa-info"> About</i>
                             </div>
-                        </NavLink>
+                        </Link>
                     </CDBSidebarFooter>
                     
                 </>

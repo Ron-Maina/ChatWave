@@ -10,16 +10,14 @@ import NewContact from './NewContact';
 import UpdateProfile from './UpdateProfile';
 import About from './About';
 
-
 function App() {
   const [user, setUser] = useState(null);
   const [chat, setChat] = useState({})
-  const [chatContact, setChatContact] = useState('')
+  const [chatContact, setChatContact] = useState([])
   const [chatID, setchatID] = useState([])
-  const [conversations, setConversations] = useState([])
 
   useEffect(() => {
-    fetch("/check_session")
+    fetch("/check-session")
     .then((response) => {
       if (response.ok) {
         response.json()
@@ -29,12 +27,6 @@ function App() {
       }
     });
   }, []);
-
-  useEffect(() => {
-    fetch('/contact-session')
-    .then(res => res.json())
-    .then(data => setConversations([...conversations, data]))
-  }, [chatContact])
 
   function handleLogin(user){
     setUser(user)
@@ -48,20 +40,20 @@ function App() {
     setUser(data)
   }
 
-  function renderChatContact(id){
-    if (chatID.includes(id)){
+  function renderChatContact(contact){
+    if (chatID.includes(contact.id)){
       return null
     }else{
-      setchatID([...chatID, id])
-      setChatContact(id)
+      setchatID([...chatID, contact.id])
+      setChatContact([...chatContact, contact])
     }  
   }
 
   return (
     <Routes>
-      <Route exact path="/" element = {<Signup />}/>
-      <Route exact path="/login" element = {<Login onLogin={handleLogin}/>}/>
-      <Route exact path="/home" element = {<Home conversations={conversations} user={user} onChat={renderChat} chat={chat} />}/>
+      <Route path="/" element = {<Signup />}/>
+      <Route path="/login" element = {<Login onLogin={handleLogin}/>}/>
+      <Route exact path="/home" element = {<Home chatContact={chatContact} user={user} onChat={renderChat} />}/>
       <Route exact path="/contacts" element = {<Contacts onChat={renderChat} user={user}/>}/>
       <Route exact path="/chat" element = {<Chat chat={chat} onChat={renderChatContact} user={user}/>}/>
       <Route exact path="/new-contact" element = {<NewContact user={user}/>}/>

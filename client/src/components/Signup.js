@@ -18,7 +18,7 @@ function Signup() {
         email: yup.string().email("Invalid email").required("Must enter email"),
         name: yup.string().required("Must enter a name"),
         password: yup.string().required("Must Enter Password"),
-        number: yup.number().positive().min(10).required("Must Enter Phone Number")
+        number: yup.number().required("Must Enter Phone Number")
     });
 
     const formik = useFormik({
@@ -70,7 +70,7 @@ function Signup() {
                 />
                 <p style={{ color: "red" }}> {formik.errors.email}</p>
                 
-                <label htmlFor="name" className='input-label'>Name:</label>
+                <label htmlFor="name" className='input-label'>First Name:</label>
                 <br />
                 <input
                 type='text'
@@ -90,6 +90,8 @@ function Signup() {
                 autoComplete="off"
                 id="number"
                 name="number"
+                maxLength={10}
+                minLength={10}
                 onChange={formik.handleChange}
                 value={formik.values.number}
                 />

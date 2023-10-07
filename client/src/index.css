@@ -99,11 +99,11 @@ form{
 }
 
 .slide-out {
-  margin-left: 166px;
+  margin-left: 165px;
   transition: margin-left 0.1s ease;
 }
 .slide-in {
-  margin-left: 69px;
+  margin-left: 90px;
   transition: margin-left 0.1s ease;
 }
 .slide-in::-webkit-scrollbar {
@@ -120,7 +120,7 @@ form{
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-  margin-left: 15px;
+  margin-left: 20px;
 }
 #searchbar label{
   margin-top: 40px;

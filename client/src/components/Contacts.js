@@ -55,14 +55,14 @@ function Contacts({onChat, user}) {
                 <h2 className='headings-light'>Contacts</h2>
                 <Search searchTerm={searchTerm} onSearchChange={setSearchTerm} />
 
-                <div className='info' >
-                    {filtered_contacts.map(contact => (
+                <div className='info'>
+                    {filtered_contacts?.map(contact => (
                         <div key={contact.id} 
                         style={{display: 'flex', gap: '30px', margin: '20px'}}>
 
                             <div id='profile' onClick={() => handleClick(contact)}>
-                                <img className= 'image' src={contact.profile_pic} alt='profile_pic'/>
-                                <p style={{margin: '10px'}}>{contact.name}</p>
+                                <img className= 'image' src={contact?.profile_pic} alt='profile_pic'/>
+                                <p style={{margin: '10px'}}>{contact?.name}</p>
                             </div>
 
                             <div 

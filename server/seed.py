@@ -7,10 +7,10 @@ fake = Faker()
 
 with app.app_context():
 
+    Chats.query.delete()
     Contacts.query.delete()
     Users.query.delete()
-    Chats.query.delete()
-    # user_contact.query.delete()
+    
 
     profile_pics = ['https://c4.wallpaperflare.com/wallpaper/280/258/513/cat-dark-black-profile-wallpaper-thumb.jpg',
                     'https://images.pexels.com/photos/7171858/pexels-photo-7171858.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',

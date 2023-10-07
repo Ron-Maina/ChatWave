@@ -15,8 +15,8 @@ function About({user}) {
         <div className='home-screen'>
             <Sidebar onchange={renderChange} user={user}/>
             <div className={isActive ? 'slide-out' : 'slide-in'} style={{overflowY: 'auto'}}>
-                <h2 style={{fontSize: '25px'}} className='headings-light'>About Us</h2>
-                <div style={{marginLeft: '15px'}}>
+                <h2 style={{fontSize: '25px', textAlign: 'center'}} className='headings-light'>About Us</h2>
+                <div style={{marginLeft: '35px'}}>
                     <p >ChatWave is your ultimate destination for seamless and engaging conversations in the digital realm. 
                         Designed to revolutionize the way we connect and communicate, ChatWave offers a dynamic and user-friendly platform for individuals, 
                         friends, families, and teams to come together and converse in real-time.

@@ -12,11 +12,10 @@ function Chat({chat, onChat, user}) {
         setIsActive(false)
       }
     }
-
     function handleSubmit(e){
         e.preventDefault()
         if (body !== ""){
-            onChat(chat.id)
+            onChat(chat)
         }
         
         let chat_id = {
@@ -31,12 +30,8 @@ function Chat({chat, onChat, user}) {
             body: JSON.stringify(chat_id)
         })
         .then(res => res.json())
+        .then(data => console.log(data))
         setBody('')
-
-        // fetch(`/chat-session/${user.id}`)
-        // .then(res => res.json())
-        // .then(data => setMessages(data.chats))
-
     }
     return (
         <div className='home-screen'>
@@ -44,12 +39,11 @@ function Chat({chat, onChat, user}) {
             <div>
                 <div className={isActive ? 'slide-out' : 'slide-in'} style={{overflowY: 'auto', width: '500px'}} id='profile'>
                     <div className='headings-light' style={{display: 'flex'}}>
-                        <img className = 'image' src={chat.profile_pic} alt='profile_pic'/>
-                        <h3 style={{fontSize: '25px', marginTop: '10px', marginLeft: '15px'}}>{chat.name}</h3>
+                        <img className = 'image' src={chat?.profile_pic} alt='profile_pic'/>
+                        <h3 style={{fontSize: '25px', marginTop: '10px', marginLeft: '15px'}}>{chat?.name}</h3>
                     </div>
                     
                 </div>
-                
                 <hr className={isActive ? 'slide-out' : 'slide-in'}/>
                 <form className={isActive ? 'slide-out' : 'slide-in'} 
                 id='new-message' onSubmit={handleSubmit}>

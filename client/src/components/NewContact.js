@@ -8,6 +8,7 @@ function NewContact({user}) {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [number, setNumber] = useState("");
+    const [error, setError] = useState(null);
 
     
     function renderChange(state){
@@ -17,6 +18,20 @@ function NewContact({user}) {
         setIsActive(false)
       }
     }
+
+    function isValidEmail(email) {
+        return /\S+@\S+\.\S+/.test(email);
+    }
+
+    const handleChange = event => {
+        if (!isValidEmail(event.target.value)) {
+          setError('Email is invalid');
+        } else {
+          setError(null);
+        }
+    
+        setEmail(event.target.value);
+    };
 
     function handleSubmit(e){
         e.preventDefault()
@@ -70,7 +85,7 @@ function NewContact({user}) {
                     onChange={(e) => setName(e.target.value)}
                     />
                     <br/>
-                    <label htmlFor="message" className='input-label'>Email:</label>
+                    <label htmlFor="email" className='input-label'>Email:</label>
                     <input
                     className='input-field'
                     type="text"
@@ -79,14 +94,17 @@ function NewContact({user}) {
                     autoComplete="off"
                     value={email}
                     size='30'
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={handleChange}
                     />
+                    {error && <h7 style={{color: 'red'}}>{error}</h7>}
                     <br/>
-                    <label htmlFor="message" className='input-label'>Number:</label>
+                    <label htmlFor="number" className='input-label'>Number:</label>
                     <input
                     className='input-field'
                     type="text"
                     name="number"
+                    maxLength={10}
+                    minLength={10}
                     required
                     autoComplete="off"
                     value={number}

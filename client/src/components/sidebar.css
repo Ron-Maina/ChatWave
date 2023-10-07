@@ -8,9 +8,11 @@
   overflow: hidden;
 }
 #sidebar-menu{
-  padding-top: 80px;
+  margin-top: 40px;
+  text-align: center;
 }
 #sidebar-items{
   margin-bottom: 50px;
   color: white;
 }
+

@@ -2,13 +2,13 @@ from flask import make_response, jsonify, request, session, render_template
 from flask_restful import Resource
 from werkzeug.exceptions import BadRequest
 
-
-
-from config import app, db, api, bcrypt
+from config import app, db, api
 from models import  Users, Contacts, Chats
 
 app.config['SESSION_TYPE'] = 'filesystem'
 
+from dotenv import load_dotenv
+load_dotenv()
 
 @app.route('/')
 @app.route('/<int:id>')
@@ -52,7 +52,9 @@ class Login(Resource):
         user = Users.query.filter(Users.email == request.get_json()['email']).first()
         password = request.get_json()['password']
         if (user) and (user.authenticate(password) == True):
+            
             session['user'] = user.id
+
             response = make_response(
                 jsonify(user.to_dict()),
                 200
@@ -244,12 +246,10 @@ class ContactSession(Resource):
             return {}, 401
     
 
-    
-
-api.add_resource(Signup, '/signup')
+api.add_resource(Signup, '/')
 api.add_resource(Login, '/login')
 api.add_resource(Logout, '/logout')
-api.add_resource(CheckSession, '/check_session')
+api.add_resource(CheckSession, '/check-session')
 api.add_resource(Contact, '/contacts')
 api.add_resource(GetContactByID, '/contacts/<int:id>')
 api.add_resource(GetUserByID, '/users/<int:id>')

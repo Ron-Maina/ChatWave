@@ -3,12 +3,14 @@ import Sidebar from './Sidebar'
 import Search from './Search';
 import {useNavigate } from 'react-router-dom'
 
-function Home({conversations, user, onChat}) {
+
+function Home({chatContact, user, onChat}) {
+    const navigate = useNavigate()
+
     const [isActive, setIsActive] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
     
-    const navigate = useNavigate()
-
+    
     function renderChange(state){
       if (state === true){
         setIsActive(true);
@@ -17,24 +19,14 @@ function Home({conversations, user, onChat}) {
       }
     }
 
-    const filtered_chats = conversations.filter(chat => {
-      return chat.name.toLowerCase().includes(searchTerm.toLowerCase())
-    })
-
-    function handleDelete(id){
-      fetch(`/chats/${id}`,{
-        method: 'DELETE'
-      })
-      .then(res => {
-        if (res.ok){
-            alert('Deleted successfully')
-        }
-      })
-    }
     function handleClick(contact){
       onChat(contact)
-      navigate("/chat")
+      navigate('/chat')
     }
+
+    const filtered_chats = chatContact.filter(chat => {
+      return chat.name.toLowerCase().includes(searchTerm.toLowerCase())
+    })
 
   return (
     <div className='home-screen'>
@@ -46,10 +38,10 @@ function Home({conversations, user, onChat}) {
           <div className='info'>
             <h5 className='headings-light' style={{fontSize: '25px'}}>Chats</h5>
             {filtered_chats.map(contact => (
-              <div key={contact.id} id='profile' style={{marginLeft: '15px', marginTop: '15px'}} onClick={() => handleClick(contact)}>
-                <img className= 'image' src={contact.profile_pic} alt='profile_pic'/>
-                <p style={{margin: '15px'}}>{contact?.name}</p>
-                <i onClick={() => handleDelete(contact.id)} style={{color: 'red', position: 'absolute', right: '30px', marginTop: '17px'}} class="fa fa-trash"></i>
+              <div key={contact.id} id='profile' style={{marginLeft: '15px', marginTop: '15px'}}>
+                <img className= 'image' src={contact?.profile_pic} alt='profile_pic'/>
+                <p onClick={() => handleClick(contact)} style={{margin: '10px'}}>{contact?.name}</p>
+                <i style={{color: 'red', position: 'absolute', right: '40px', marginTop: '12px'}} class="fa fa-trash"></i>
               </div>
               
             ))}
