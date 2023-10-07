@@ -5,6 +5,7 @@ from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import MetaData
 from flask_cors import CORS
+import os
 
 app = Flask(
     __name__,
@@ -16,7 +17,7 @@ app = Flask(
 cors = CORS(app)
 
 app.secret_key = 'd3b0461fe10d9ec3e8058caad4b42ecf'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///chatwave.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URI')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json.compact = False
 
