@@ -1,7 +1,7 @@
 # ChatWave
 
 ## Description
-A Social Media App created with React and FLask
+A Chat App created with React and FLask to bring people together through livley conversations
 
 By Ron Maina
 
