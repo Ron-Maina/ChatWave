@@ -257,6 +257,17 @@ api.add_resource(GetChatByID, '/chats/<int:id>')
 api.add_resource(ContactSession, '/contact-session')
 
 
+@app.route('/loginpage')
+@app.route('/contactspage')
+@app.route('/chatpage')
+@app.route('/new-contactpage')
+@app.route('/update-profilepage')
+@app.route('/settingspage')
+@app.route('/homepage')
+def catch_all():
+    return render_template("index.html")
+
+
 if __name__ == '__main__':
     db.session.creat_all()
     app.run(debug = True)
