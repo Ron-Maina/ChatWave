@@ -112,7 +112,7 @@ function Signup() {
             </form>
             <div style={{textAlign: 'center'}}>
                 <p>
-                    <Link to = "/login" style={{color: "white"}}>Already have an account? Login</Link>
+                    <Link to = "/loginpage" style={{color: "white"}}>Already have an account? Login</Link>
                 </p>
             </div>
         </div>
