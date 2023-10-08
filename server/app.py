@@ -245,8 +245,7 @@ class ContactSession(Resource):
         else:
             return {}, 401
     
-
-api.add_resource(Signup, '/')
+api.add_resource(Signup, '/signup')
 api.add_resource(Login, '/login')
 api.add_resource(Logout, '/logout')
 api.add_resource(CheckSession, '/check-session')
