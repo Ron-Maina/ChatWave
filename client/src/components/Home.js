@@ -21,7 +21,7 @@ function Home({chatContact, user, onChat}) {
 
     function handleClick(contact){
       onChat(contact)
-      navigate('/chat')
+      navigate('/chatpage')
     }
 
     const filtered_chats = chatContact.filter(chat => {

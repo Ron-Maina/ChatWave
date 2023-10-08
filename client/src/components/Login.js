@@ -30,7 +30,7 @@ function Login({onLogin}) {
                 setEmail('')
                 setPass('')
             }else{
-                navigate("/home", {replace: true})
+                navigate("/homepage", {replace: true})
                 return response.json();
             }   
         })

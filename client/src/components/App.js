@@ -52,13 +52,13 @@ function App() {
   return (
     <Routes>
       <Route path="/" element = {<Signup />}/>
-      <Route path="/login" element = {<Login onLogin={handleLogin}/>}/>
-      <Route exact path="/home" element = {<Home chatContact={chatContact} user={user} onChat={renderChat} />}/>
-      <Route exact path="/contacts" element = {<Contacts onChat={renderChat} user={user}/>}/>
-      <Route exact path="/chat" element = {<Chat chat={chat} onChat={renderChatContact} user={user}/>}/>
-      <Route exact path="/new-contact" element = {<NewContact user={user}/>}/>
-      <Route exact path="/update-profile" element = {<UpdateProfile user={user} onUpdate={handleUpdate}/>}/>
-      <Route exact path="/settings" element = {<About user={user}/>}/>
+      <Route path="/loginpage" element = {<Login onLogin={handleLogin}/>}/>
+      <Route exact path="/homepage" element = {<Home chatContact={chatContact} user={user} onChat={renderChat} />}/>
+      <Route exact path="/contactspage" element = {<Contacts onChat={renderChat} user={user}/>}/>
+      <Route exact path="/chatpage" element = {<Chat chat={chat} onChat={renderChatContact} user={user}/>}/>
+      <Route exact path="/new-contactpage" element = {<NewContact user={user}/>}/>
+      <Route exact path="/update-profilepage" element = {<UpdateProfile user={user} onUpdate={handleUpdate}/>}/>
+      <Route exact path="/settingspage" element = {<About user={user}/>}/>
     </Routes>
   );
 }

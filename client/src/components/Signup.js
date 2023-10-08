@@ -11,14 +11,14 @@ function Signup() {
     const [refreshPage, setRefreshPage] = useState(false);
     
     function loginPage(){
-        navigate("/login")
+        navigate("/loginpage")
     }
 
     const formSchema = yup.object().shape({
         email: yup.string().email("Invalid email").required("Must enter email"),
         name: yup.string().required("Must enter a name"),
         password: yup.string().required("Must Enter Password"),
-        number: yup.number().required("Must Enter Phone Number")
+        number: yup.string().required("Must Enter Phone Number")
     });
 
     const formik = useFormik({
@@ -83,7 +83,7 @@ function Signup() {
                 />
                 <p style={{ color: "red" }}> {formik.errors.name}</p>
 
-                <label htmlFor="number" className='input-label'> Number:</label>
+                <label htmlFor="number" className='input-label'> Phone Number(10 digits):</label>
                 <br />
                 <input
                 className='input-field'

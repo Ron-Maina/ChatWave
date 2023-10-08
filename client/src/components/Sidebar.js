@@ -42,7 +42,7 @@ function Sidebar({onchange, user}) {
             method: "DELETE",
         })
 
-        navigate("/login", {replace: true})
+        navigate("/loginpage", {replace: true})
     }
 
     return (
@@ -56,15 +56,15 @@ function Sidebar({onchange, user}) {
                     <CDBSidebarContent className="sidebar-content">
                         <CDBSidebarMenu id = 'sidebar-menu'>
 
-                            <Link to="/home">
+                            <Link to="/homepage">
                             <CDBSidebarMenuItem id= 'sidebar-items' icon="home"></CDBSidebarMenuItem>
                             </Link>
 
-                            <Link to="/contacts">
+                            <Link to="/contactspage">
                                 <CDBSidebarMenuItem id= 'sidebar-items' icon="address-book"></CDBSidebarMenuItem>
                             </Link>
                             
-                            <Link to="/new-contact">
+                            <Link to="/new-contactpage">
                             <CDBSidebarMenuItem id= 'sidebar-items' icon="plus-circle"></CDBSidebarMenuItem>
                             </Link>
 
@@ -72,7 +72,7 @@ function Sidebar({onchange, user}) {
                         </CDBSidebarMenu>
                     </CDBSidebarContent>
                     <CDBSidebarFooter style={{ textAlign: 'center' }}>
-                        <Link to="/settings">
+                        <Link to="/settingspage">
                             <div className="sidebar-btn-wrapper" style={{padding: '250px 5px',}}>
                                 <i style={{color:'white'}} class="fa fa-info"></i>
                             </div>
@@ -81,7 +81,7 @@ function Sidebar({onchange, user}) {
                 </>
             ) : (
                 <>  
-                    <Link to="/update-profile">
+                    <Link to="/update-profilepage">
                     <CDBSidebarHeader>
                         <i className="fa fa-user fa-large"> {user?.name}</i> 
                     </CDBSidebarHeader>
@@ -90,13 +90,17 @@ function Sidebar({onchange, user}) {
                     <CDBSidebarContent className="sidebar-content">
                         <CDBSidebarMenu id = 'sidebar-menu'>
 
+                            <Link to="/homepage">
                             <CDBSidebarMenuItem id= 'sidebar-items' icon="home">Home</CDBSidebarMenuItem>
+                            </Link>
 
-                            <Link to="/contacts">
+                            <Link to="/contactspage">
                                 <CDBSidebarMenuItem id= 'sidebar-items' icon="address-book">Contacts</CDBSidebarMenuItem>
                             </Link>
 
+                            <Link to="/new-contactpage">
                             <CDBSidebarMenuItem id= 'sidebar-items' icon="plus-circle">Add Contacts</CDBSidebarMenuItem>
+                            </Link>
 
                             <CDBSidebarMenuItem id= 'sidebar-items' icon="times" onClick={Logout}>Logout</CDBSidebarMenuItem>
                         </CDBSidebarMenu>
@@ -104,7 +108,7 @@ function Sidebar({onchange, user}) {
 
                     
                     <CDBSidebarFooter style={{ textAlign: 'center' }}>
-                        <Link to="/settings">
+                        <Link to="/settingspage">
                             <div className="sidebar-btn-wrapper" style={{padding: '250px 5px',}}>
                                 <i i class="fa fa-info"> About</i>
                             </div>

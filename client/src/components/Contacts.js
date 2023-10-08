@@ -28,7 +28,7 @@ function Contacts({onChat, user}) {
 
     function handleClick(contact){
         onChat(contact)
-        navigate('/chat')
+        navigate('/chatpage')
     }
 
     function handleDelete(id){
