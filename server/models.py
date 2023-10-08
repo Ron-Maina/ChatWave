@@ -11,7 +11,7 @@ class Users(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
-    number = db.Column(db.Integer, unique=True, nullable=False)
+    number = db.Column(db.String, unique=True, nullable=False)
     email = db.Column(db.String, unique=True, nullable=False)
     profile_pic = db.Column(db.String)
     _password_hash = db.Column(db.String, nullable = False)
