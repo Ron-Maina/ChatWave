@@ -1,13 +1,13 @@
 # ChatWave
 
 ## Description
-A Chat App created with React and FLask to bring people together through livley conversations
+A Chat App designed using Figma, and created with React and FLask to bring people together through lively conversations
 
 By Ron Maina
 
 ## How To Use
 ### Setup Requirements
-* A computer, tablet or phone
+* A computer, tablet, or phone
 * Access to the internet
 
 ### View Live Site
@@ -20,14 +20,14 @@ You as the user should be able to:
 * Create an account by signing up
 * Login after signing up or if already have an account
 * New users should see a blank chat section which gets populated after initiating a conversation with contacts
-* Navigate to diferent pages through the collapsible sidebar
+* Navigate to different pages through the collapsible sidebar
 * View your profile with your information and make any updates if required by selecting the profile icon
 * See a list of contacts by selecting the contact book icon
 * Open a conversation screen by selecting a contact. On typing a message, the contact is added to the chats section on the HomePage
 * Add a contact by clicking on the plus icon
 * Delete a contact from the contact page
 * Logout by clicking the **X** icon
-* View About section by clicking **i** icon
+* View the About section by clicking the **i** icon
 
 ## Run Locally
 ### Setup Requirements
@@ -44,7 +44,7 @@ git clone git@github.com:Ron-Maina/ChatWave.git
 ```
 cd ChatWave
 ```
-* Open in visual studio code using:
+* Open in Visual Studio code using:
 ```
 code .
 ```
@@ -63,6 +63,14 @@ python seed.py
 ```
  honcho start -f Procfile.dev
 ```
+
+## Technologies Used
+* React
+* Flask
+* React Bootstrap
+* Vanilla CSS
+* Figma
+* Postgresql
 
 ## License
 MIT License
