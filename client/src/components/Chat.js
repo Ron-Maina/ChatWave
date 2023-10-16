@@ -46,7 +46,7 @@ function Chat({chat, onChat, user}) {
                 </div>
                 <hr className={isActive ? 'slide-out' : 'slide-in'}/>
                 <form className={isActive ? 'slide-out' : 'slide-in'} 
-                id='new-message' onSubmit={handleSubmit}>
+                    id='new-message' onSubmit={handleSubmit}>
                 <label htmlFor="message" className='input-label'></label>
                     <input
                     placeholder='Message..'
