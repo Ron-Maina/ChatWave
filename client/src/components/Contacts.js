@@ -9,6 +9,7 @@ function Contacts({onChat, user}) {
 
     const [contacts, setContacts] = useState([])
     const [searchTerm, setSearchTerm] = useState("");
+    // const [id, setID] = useState("")
 
     useEffect(() => {
         fetch('/contacts')
@@ -28,6 +29,25 @@ function Contacts({onChat, user}) {
 
     function handleClick(contact){
         onChat(contact)
+        let contactSession = {'contact': contact.id}
+        fetch('/contact-session', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(contactSession),
+        })
+        .then((response) => {
+            if (!response.ok) {
+                console.log('failed')
+            }else{
+                response.json()
+                .then(data => console.log(data))
+                console.log('contact session created')
+
+            }   
+        })
+
         navigate('/chatpage')
     }
 
@@ -40,11 +60,11 @@ function Contacts({onChat, user}) {
                 alert('Deleted successfully')
             }
         })
-        let new_contacts = contacts.filter(contact => contact.id !== id)
+        let new_contacts = contacts?.filter(contact => contact.id !== id)
         setContacts(new_contacts)
     }
    
-    const filtered_contacts = contacts.filter(contact => {
+    const filtered_contacts = contacts?.filter(contact => {
         return contact.name.toLowerCase().includes(searchTerm.toLowerCase())
     })
    

@@ -28,6 +28,19 @@ function App() {
     });
   }, []);
 
+  useEffect(() => {
+    fetch("/session")
+    .then((response) => {
+      if (response.ok) {
+        response.json()
+        .then((data) => setChat(data));
+      } else{
+        console.log('Session not found')
+      }
+    });
+  }, []);
+ 
+
   function handleLogin(user){
     setUser(user)
   }
@@ -51,9 +64,9 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element = {<Signup />}/>
-      <Route path="/loginpage" element = {<Login onLogin={handleLogin}/>}/>
-      <Route exact path="/homepage" element = {<Home chatContact={chatContact} user={user} onChat={renderChat} />}/>
+      {/* <Route path="/" element = {<Signup />}/>
+      <Route path="/loginpage" element = {<Login onLogin={handleLogin}/>}/> */}
+      <Route exact path="/" element = {<Home chatContact={chatContact} user={user} onChat={renderChat} />}/>
       <Route exact path="/contactspage" element = {<Contacts onChat={renderChat} user={user}/>}/>
       <Route exact path="/chatpage" element = {<Chat chat={chat} onChat={renderChatContact} user={user}/>}/>
       <Route exact path="/new-contactpage" element = {<NewContact user={user}/>}/>

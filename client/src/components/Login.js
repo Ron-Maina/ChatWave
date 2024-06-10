@@ -4,18 +4,42 @@ import {useNavigate, Link } from 'react-router-dom'
 import Button from 'react-bootstrap/Button';
 import {BsFillChatDotsFill} from "react-icons/bs";
 
+import IconButton from "@material-ui/core/IconButton";
+import Visibility from "@material-ui/icons/Visibility";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import Input from "@material-ui/core/Input";
+
 
 function Login({onLogin}) {
+
+    const [values, setValues] = useState({
+        password: "",
+        showPassword: false,
+    });
+
+    const handleClickShowPassword = () => {
+        setValues({ ...values, showPassword: !values.showPassword });
+    };
+ 
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
+    
+    
+    const handlePasswordChange = (password) => (event) => {
+        setValues({ ...values, [password]: event.target.value });
+    };
+
     const navigate = useNavigate() 
 
     const [Email, setEmail] = useState("")
-    const [Password, setPass] = useState("")
 
     function handleSubmit(e){
         e.preventDefault()
         const userDetails = {
             "email": Email,
-            "password": Password,
+            "password": values.password,
         }
         fetch('/login', {
             method: 'POST',
@@ -28,7 +52,8 @@ function Login({onLogin}) {
             if (!response.ok) {
                 alert("Invalid Email or Password");
                 setEmail('')
-                setPass('')
+                setValues({ ...values, password: ''});
+
             }else{
                 navigate("/homepage", {replace: true})
                 return response.json();
@@ -61,17 +86,26 @@ function Login({onLogin}) {
             />
             <br/>
             
-            <label htmlFor='password' className='input-label' style={{marginTop: '20px'}}>Password: </label>
-            <br/>
-            <input
-            className='input-field'
-            autoComplete="off"
-            name='password'
-            required
-            type='text'
-            value={Password}
-            onChange={(e) => setPass(e.target.value)}
-            />
+            <label htmlFor="password" className='input-label' style={{marginTop: '20px'}}> Password:</label>
+                <br />
+                <Input
+                    style={{color: 'white'}}
+                    className='input-field'
+                    type={values.showPassword ? "text" : "password"}
+                    onChange={handlePasswordChange("password")}
+                    value={values.password}
+                    endAdornment={
+                        <InputAdornment position="end">
+                            <IconButton
+                                style={{color: 'white'}}
+                                onClick={handleClickShowPassword}
+                                onMouseDown={handleMouseDownPassword}
+                            >
+                                {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                            </IconButton>
+                        </InputAdornment>
+                    }
+                />
 
             <div style={{marginTop: '20px'}}>
                 <Button variant="info" type='submit'>Login</Button>{' '}   

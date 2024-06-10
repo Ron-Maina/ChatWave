@@ -217,7 +217,7 @@ class GetChatByID(Resource):
 
         response_body = {
             "delete_successful": True,
-            "message": "Review deleted."    
+            "message": "Message deleted."    
         }
 
         response = make_response(
@@ -229,22 +229,29 @@ class GetChatByID(Resource):
 
         
 class ContactSession(Resource):
-    def get(self):
-        contact = Contacts.query.filter(Contacts.id == session.get('contact')).first()
-        print(contact)
+    def post(self):
+        session["contact"] = None
+        contact = Contacts.query.filter(Contacts.id == request.get_json()['contact']).first()
         if contact:
-            contact_dict ={
-                "name": contact.name,
-                "profile_pic": contact.profile_pic
-            }
+            session['contact'] = contact.id
+
             response = make_response(
-                jsonify(contact_dict), 
+                jsonify(contact.to_dict()),
                 200
             )
             return response
+        else:    
+            return {"Failed"}
+        
+class CheckContactSession(Resource):
+    def get(self):
+        contact = Contacts.query.filter(Contacts.id == session.get('contact')).first()
+        if contact:
+            return jsonify(contact.to_dict())
         else:
             return {}, 401
-    
+        
+       
 api.add_resource(Signup, '/signup')
 api.add_resource(Login, '/login')
 api.add_resource(Logout, '/logout')
@@ -255,6 +262,8 @@ api.add_resource(GetUserByID, '/users/<int:id>')
 api.add_resource(Chat, '/chats')
 api.add_resource(GetChatByID, '/chats/<int:id>')
 api.add_resource(ContactSession, '/contact-session')
+api.add_resource(CheckContactSession, '/session')
+
 
 
 @app.route('/loginpage')

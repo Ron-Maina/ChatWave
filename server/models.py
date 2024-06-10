@@ -58,7 +58,7 @@ class Contacts(db.Model, SerializerMixin):
 class Chats(db.Model, SerializerMixin):
     __tablename__ = 'chats'
 
-    serialize_rules = ('-contact.chats', '-user.chats','-contact_id', '-user_id', '-created_at')
+    serialize_rules = ('-contact.chats', '-user.chats','-contact_id', '-user_id',)
 
     id = db.Column(db.Integer, primary_key=True)
     messages = db.Column(db.String)

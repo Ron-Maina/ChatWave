@@ -45,18 +45,30 @@ function Chat({chat, onChat, user}) {
                     
                 </div>
                 <hr className={isActive ? 'slide-out' : 'slide-in'}/>
-                <form className={isActive ? 'slide-out' : 'slide-in'} 
-                    id='new-message' onSubmit={handleSubmit}>
-                <label htmlFor="message" className='input-label'></label>
-                    <input
-                    placeholder='Message..'
-                    type="text"
-                    name="message"
-                    autoComplete="off"
-                    value={body}
-                    size='50'
-                    onChange={(e) => setBody(e.target.value)}
-                    />
+
+                <div className={isActive ? 'slide-out' : 'slide-in'}>
+                    {chat.chats?.map(texts => (
+                        <div className='bubble right' style={{right: '5px', position: 'absolute'}}>
+                            {texts.messages}
+                            {/* <h6 style={{color: 'red'}}>{texts.created_at}</h6> */}
+                        </div>
+                    ))}
+                    {chat.chats?.map(texts => (
+                        <div className="bubble left" style={{left: '5px', top: '40px', position: 'relative'}}>{texts.responses}</div>
+                    ))}
+                </div>
+                
+                <form className={isActive ? 'slide-out' : 'slide-in'} id='new-message' onSubmit={handleSubmit}>
+                    <label htmlFor="message" className='input-label'></label>
+                        <input
+                        placeholder='Message..'
+                        type="text"
+                        name="message"
+                        autoComplete="off"
+                        value={body}
+                        size='50'
+                        onChange={(e) => setBody(e.target.value)}
+                        />
                 </form>
             </div>
         </div>

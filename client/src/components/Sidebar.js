@@ -56,7 +56,7 @@ function Sidebar({onchange, user}) {
                     <CDBSidebarContent className="sidebar-content">
                         <CDBSidebarMenu id = 'sidebar-menu'>
 
-                            <Link to="/homepage">
+                            <Link to="/">
                             <CDBSidebarMenuItem id= 'sidebar-items' icon="home"></CDBSidebarMenuItem>
                             </Link>
 
@@ -90,7 +90,7 @@ function Sidebar({onchange, user}) {
                     <CDBSidebarContent className="sidebar-content">
                         <CDBSidebarMenu id = 'sidebar-menu'>
 
-                            <Link to="/homepage">
+                            <Link to="/">
                             <CDBSidebarMenuItem id= 'sidebar-items' icon="home">Home</CDBSidebarMenuItem>
                             </Link>
 
