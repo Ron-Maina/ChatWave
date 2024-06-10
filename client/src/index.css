@@ -103,7 +103,7 @@ form{
   transition: margin-left 0.1s ease;
 }
 .slide-in {
-  margin-left: 115px;
+  margin-left: 112px;
   transition: margin-left 0.1s ease;
 }
 .slide-in::-webkit-scrollbar {
